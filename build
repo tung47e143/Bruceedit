@@ -1,0 +1,26 @@
+name: Build Bruce firmware
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Bruce code
+      uses: actions/checkout@v3
+
+    - name: Install PlatformIO CLI
+      run: pip install -U platformio
+
+    - name: Build firmware for smoochiee-board
+      run: platformio run -e smoochiee-board
+
+    - name: Upload firmware artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: firmware
+        path: .pio/build/smoochiee-board/firmware.bin
