@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: 📥 Checkout source code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
     - name: 🛠 Install PlatformIO
       run: pip install -U platformio
@@ -21,7 +21,8 @@ jobs:
       run: platformio run -e smoochiee-board
 
     - name: 📦 Upload firmware
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: firmware
         path: .pio/build/smoochiee-board/firmware.bin
+        retention-days: 7
